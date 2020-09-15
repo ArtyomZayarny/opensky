@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content'
-import LoginForm from './components/Login/LoginForm'
+import AuthPage from './Pages/Auth/AuthPage'
+import Form from './components/Form'
 
 import {
   BrowserRouter as Router,
@@ -19,29 +20,25 @@ import {
 */
 
 const App = () =>{
-  const [isLoged,setLoged] = useState(false);
-
-  function Home() {
-    return <h2>Home</h2>;
-  }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-
+  const [isAuth,setAuth] = useState(false);
+  const [isMember,setMember] = useState(false);
   return (
     <div className="App">
+      <Router>
       <Header />
-    <Router>
-    <Route exact path="/">
-              {isLoged ? <Redirect to="/dashboard" /> : <LoginForm />}
-          </Route>
-    </Router>
       
+        <Route exact path="/">
+  { isAuth ? <Redirect to="/dashboard" /> : <Form mode="signup"/>}  
+        </Route>
+        <Switch>
+          <Route exact path='/signin' >
+              <Form mode="signin"/>
+          </Route>
+          <Route exact path='/signup'>
+              <Form mode="signup"/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
