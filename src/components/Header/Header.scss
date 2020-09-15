@@ -4,6 +4,14 @@
     &__logo {
         max-width: 150px;
     }
+    .btns-area {
+        a {
+            margin-left: 20px;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
     .content {
         display: flex;
         justify-content: space-between;
