@@ -8,7 +8,7 @@ import {
     Link
   } from "react-router-dom";
 
-export default function header() { 
+export default function header({showForm, ...props}) { 
     return (
         <div className="header">
             <div className="container">
@@ -20,13 +20,8 @@ export default function header() {
                         </Link>
                     </div>
                     <div className="btns-area">
-                    
-                        <Link to="/signin">
-                            <Button>Sign In</Button>
-                        </Link>
-                        <Link to="/signup">
-                            <Button>Sign Up</Button>
-                        </Link>
+                        <Button onClick={()=>{showForm('signin')}}>Sign In</Button>
+                        <Button onClick={()=>{showForm('signup')}} >Sign Up</Button>
                     </div>
                 </Router>
                 </div>
