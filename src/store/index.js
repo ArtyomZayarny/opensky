@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware,compose } from 'redux';
 import logger from 'redux-logger';
 
 const CREATE_USER = 'CREATE_USER';
@@ -21,7 +21,7 @@ const mainReducer = (state=initState,action) => {
     }
     return state
 }
-
-const store = createStore(mainReducer,applyMiddleware(logger));
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+const store = createStore(mainReducer,composeEnhancers(applyMiddleware(logger)));
 
 export default store;

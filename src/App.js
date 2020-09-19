@@ -2,7 +2,8 @@ import React, {useState,useEffect} from 'react';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content'
 import {useSelector} from 'react-redux'
-import Form from './components/Form/Form'
+import Form from './components/Form/Form';
+
 
 import {
   BrowserRouter as Router,
@@ -15,18 +16,10 @@ import {
 
 const App = () =>{
   const [isAuth,setAuth] = useState(false);
-  const [isMember,setMember] = useState(false);
   const users = useSelector( state =>  state.users)
   
    const[formMode,setFormMode] = useState('signup');
 
-   useEffect( () => {
-     if (users.length > 0) {
-      console.log('new member was created')
-      setMember(true)
-     }
-     
-   }, [users])
 
   return (
     <div className="App">
@@ -34,9 +27,14 @@ const App = () =>{
           <Header showForm={setFormMode} />
           <div className="container">
             <Route exact path="/">
-              { isAuth ? <Redirect to="/dashboard" /> : <Form member={isMember} mode={formMode} />}  
+              { isAuth ? <Redirect to="/dashboard" /> : <Form  mode={formMode}  setAuth={setAuth} />}  
             </Route>
           </div>
+          <Switch>
+          <Route exact path="/dashboard">
+            <Content/>
+          </Route>
+          </Switch>
         </Router>
     </div>
   );
